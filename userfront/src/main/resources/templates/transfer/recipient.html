@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+<div th:replace="common/navbar :: navbar" />
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-6">
+        
+            <div th:if="${recipientCreated != null}">
+                <div th:if="${recipientCreated == 'true'}" class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    <p th:text="#{recipient.created.success}" />
+                </div>
+
+                <div th:if="${recipientCreated == 'false'}" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    <p th:text="${message}" class="text-center" />
+                </div>
+            </div>
+           
+			<h3><span th:text="#{recipient.title.text}"></span></h3>
+			<form id="recipientForm" th:action="@{/transfer/recipient/save}" method="post">
+				<input type="hidden" name="id" th:value="${recipient.id}" />
+				
+				<div class="form-group">
+					<label for="recipientName" th:text="#{recipient.text.name.form}"></label>
+					<input type="text" class="form-control" th:value="${recipient.name}" id="recipientName" name="name" placeholder="Name" />
+				</div>
+				<div class="form-group">
+					<label for="recipientEmail" th:text="#{recipient.text.email.form}"></label>
+					<input type="email" class="form-control" th:value="${recipient.email}" id="recipientEmail" name="email" placeholder="Email" />					
+				</div>
+				<div class="form-group">
+					<label for="recipientPhone" th:text="#{recipient.text.phone.form}"></label>
+					<input type="text" class="form-control" th:value="${recipient.phone}" id="recipientPhone" name="phone" placeholder="Phone" />					
+				</div>
+				<div class="form-group">
+					<label for="recipientAccountNumber" th:text="#{recipient.text.account.number.form}"></label>
+					<input type="text" class="form-control" th:value="${recipient.accountNumber}" id="recipientAccountNumber" name="accountNumber" placeholder="Account Number" />					
+				</div>
+				<div class="form-group">
+					<label for="recipientDescription" th:text="#{recipient.text.description.form}"></label>
+					<textarea class="form-control" th:value="${recipient.description}" id="recipientDescription" th:text="${recipient.description}" name="description" placeholder="Description"></textarea>					
+				</div>
+				
+				<!-- Spring csrf already is enabled by default -->
+				<!-- Spring automatically generates a token through csrf here -->
+                <input type="hidden"
+                        name="${_csrf.parameterName}"
+                        value="${_csrf.token}"/>
+                        
+				<button class="btn btn-primary" type="submit" th:text="#{recipient.button.text.add.edit.form}"></button>                        
+			</form>
+
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+</div>
+
+<br/>
+
+<div class="row">
+	<h3><span th:text="#{recipient.list.title.text}"></span></h3>
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover table-striped">
+			<thead>
+				<tr>
+					<th><label th:text="#{recipient.table.head.th.name.text}"></label> </th>
+					<th><label th:text="#{recipient.table.head.th.email.text}"></label> </th>
+					<th><label th:text="#{recipient.table.head.th.phone.text}"></label> </th>
+					<th><label th:text="#{recipient.table.head.th.account.number.text}"></label> </th>
+					<th><label th:text="#{recipient.table.head.th.description.text}"></label> </th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-th-each="eachRecipient : ${recipientList}">
+					<td><a data-th-text="${eachRecipient.name}" th:href="@{/transfer/recipient/edit?recipientName=}+${eachRecipient.name}">...</a></td>
+					<td data-th-text="${eachRecipient.email}">...</td>
+					<td data-th-text="${eachRecipient.phone}">...</td>
+					<td data-th-text="${eachRecipient.accountNumber}">...</td>
+					<td data-th-text="${eachRecipient.description}">...</td>
+					<td><a th:href="@{/transfer/recipient/delete?recipientName=}+${eachRecipient.name}" th:text="#{recipient.table.body.td.a.delete.text}"></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

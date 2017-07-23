@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+<div th:replace="common/navbar :: navbar" />
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-6">
+        	<h2 class="title"><span th:text="#{profile.title.text}"></span></h2>
+        	<hr/>
+        	<form id="profileForm" th:action="@{/user/profile}" method="post">
+        		<div class="form-group">
+        			<label for="firstName" th:text="#{profile.form.first.name.text}"></label>
+        			<div class="cols-sm-10">
+        				<div class="input-group">
+        					<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+        					<input type="text" class="form-control" th:value="${user.firstName}" name="firstName"
+        						   id="firstName" roleId="firstName" placeholder="Enter your first name" required="required" />
+        				</div>
+        			</div>
+        		</div>
+        		
+        		<div class="form-group">
+        			<label for="lastName" th:text="#{profile.form.last.name.text}" class="cols-sm-2 control-label"></label>
+        			<div class="cols-sm-10">
+        				<div class="input-group">
+        					<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+        					<input type="text" class="form-control" th:value="${user.lastName}" name="lastName"
+        						   id="lastName" roleId="lastName" placeholder="Enter your last name" required="required" />
+        				</div>
+        			</div>
+        		</div>
+        		
+        		<div class="form-group">
+        			<label for="phone" th:text="#{profile.form.phone.text}" class="cols-sm-2 control-label"></label>
+        			<div class="cols-sm-10">
+        				<div class="input-group">
+        					<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+        					<input type="text" class="form-control" th:value="${user.phone}" name="phone"
+        						   id="phone" roleId="phone" placeholder="xxx-xxx-xxxx" required="required" />
+        				</div>
+        			</div>
+        		</div> 
+        		
+        		<div class="form-group">
+        			<label for="email" th:text="#{profile.form.email.text}" class="cols-sm-2 control-label"></label>
+        			<span class="bg-danger pull-right" th:if="${emailExists}" th:text="#{profile.error.email.exist.text}"></span>
+        			<div class="cols-sm-10">
+        				<div class="input-group">
+        					<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+        					<input type="text" class="form-control" th:value="${user.email}" name="email"
+        						   id="email" roleId="email" placeholder="Enter your email" required="required" />
+        				</div>
+        			</div>
+        		</div>
+        		
+        		<div class="form-group">
+        			<label for="username" th:text="#{profile.form.username.text}" class="cols-sm-2 control-label"></label>
+        			<span class="bg-danger pull-right" th:if="${usernameExists}" th:text="#{profile.error.username.exist.text}"></span>
+        			<div class="cols-sm-10">
+        				<div class="input-group">
+        					<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+        					<input type="text" class="form-control" th:value="${user.username}" name="username"
+        						   id="username" roleId="username" placeholder="Enter your username" required="required" />
+        				</div>
+        			</div>
+        		</div>  
+        		
+        		<div class="form-group">
+        			<button type="submit" class="btn btn-primary btn-block" th:text="#{profile.form.button.submit.text}"></button>
+        		</div>      		         		       		        		
+        	</form>
+        </div>		
+        <div class="col-md-6">
+        	<div class="panel-heading">
+        		<div class="panel-title text-center">
+        			<h1 class="title" th:text="#{profile.account.info.text}"></h1>
+        			<hr/>
+        		</div>
+                <table class="responstable">
+                    <tr>
+                        <th th:text="#{profile.primary.account.number.text}"></th>
+                        <th th:text="#{profile.savings.account.number.text}"></th>
+                    </tr>
+
+                    <tr>
+                        <td data-th-text="${user.primaryAccount.accountNumber}">...</td>
+                        <td data-th-text="${user.savingsAccount.accountNumber}">...</td>
+                    </tr>
+                </table>        		
+        	</div>
+        </div>
+    </div>
+</div><!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+<div th:replace="common/navbar :: navbar" />
+
+<div class="container main">
+    <div class="row ">
+        <div class="col-lg-12">
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h2 th:text="#{primary.account.section.balance}"></h2>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <h1><i class="fa fa-usd" aria-hidden="true"></i>
+                                <span th:text="${primaryAccount.accountBalance}">...</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="table-responsive">
+
+        <table id="example" class="table table-bordered table-hover table-striped">
+
+            <thead>
+            <tr>
+                <th class="panel panel-success"><label th:text="#{primary.account.table.head.th.post.date.text}"></label> </th>
+                <th><label th:text="#{primary.account.table.head.th.description.text}"></label> </th>
+                <th><label th:text="#{primary.account.table.head.th.type.text}"></label> </th>
+                <th><label th:text="#{primary.account.table.head.th.status.text}"></label> </th>
+                <th><label th:text="#{primary.account.table.head.th.amount.text}"></label> </th>
+                <th><label th:text="#{primary.account.table.head.th.available.balance.text}"></label> </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr data-th-each="primaryTransaction : ${primaryTransactionList}">
+                <td data-th-text="${primaryTransaction.date}">...</td>
+                <td data-th-text="${primaryTransaction.description}">...</td>
+                <td data-th-text="${primaryTransaction.type}">...</td>
+                <td data-th-text="${primaryTransaction.status}">...</td>
+                <td data-th-text="${primaryTransaction.amount}">...</td>
+                <td data-th-text="${primaryTransaction.availableBalance}">...</td>
+            </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<div th:replace="common/header :: body-bottom-scripts"/>
+<script>
+    $('document').ready(function () {
+        $('#example').DataTable();
+    })
+</script>
+</body>
+</html>

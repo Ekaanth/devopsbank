@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-6 col-md-offset-3">
+
+            <div th:if="${signedUp != null}">
+                <div th:if="${signedUp == 'true'}" class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    <p th:text="#{signup.form.created.success}" />
+                </div>
+
+                <div th:if="${signedUp == 'false'}" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    <p th:text="${message}" class="text-center" />
+                </div>
+            </div>
+
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title" th:text="#{signup.h1.title.signup}"></h1>
+                    <hr />
+                </div>
+            </div>
+
+            <div class="well">
+
+                <form id="signUpForm" class="form-horizontal"
+                      th:object="${__${T(com.userfront.web.controller.SignUpController).USER_MODEL_KEY_NAME}__}"
+                      method="post" th:action="@{/signup}">
+
+                    <div class="form-group">
+                        <label for="firstName" class="cols-sm-2 control-label" th:text="#{signup.form.first.name}"></label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="firstName" th:field="*{firstName}" name="firstName" roleId="firstname" placeholder="Enter your first name" required="required"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName" class="cols-sm-2 control-label" th:text="#{signup.form.last.name}"></label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="lastName" th:field="*{lastName}" name="lastName" roleId="lastName" placeholder="Enter your last name" required="required"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="cols-sm-2 control-label" th:text="#{signup.form.phone}"></label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="phone" th:field="*{phone}" name="phone" roleId="phone" placeholder="xxx-xxx-xxxx" required="required"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="cols-sm-2 control-label" th:text="#{signup.form.your.email}"></label><span class="bg-danger pull-right" th:if="${emailExist}" th:text="#{signup.form.email.already.exist}"></span>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="email" th:field="*{email}" name="email" roleId="email"  placeholder="Enter your Email" required="required"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label" th:text="#{signup.form.username}"></label><span class="bg-danger pull-right" th:if="${usernameExist}" th:text="#{signup.form.username.already.exist}"></span>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="username" th:field="*{username}" name="username" roleId="username"  placeholder="Enter your Username" required="required"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="cols-sm-2 control-label" th:text="#{signup.form.password}"></label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" id="password" th:field="*{password}" name="password" roleId="password"  placeholder="Enter your Password" required="required"/>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input id="showPassword" type="checkbox" th:text="#{signup.form.checkbox.show.password}" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <div class="form-group ">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block login-button" th:text="#{signup.form.submit}"></button>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group ">
+                        <a id="cancel" name="cancel" class="btn btn-info btn-lg btn-block login-button" th:href="@{/}" th:text="#{signup.form.a.back}"></a>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div><!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

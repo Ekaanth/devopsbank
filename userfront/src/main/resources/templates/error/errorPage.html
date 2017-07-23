@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: navbar" />
+
+<!-- Login Section -->
+<img class="img-responsive" th:src="@{/images/banner.png}" alt="banner"/>
+<br/>
+<br/>
+<!-- Generic error section -->
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1 th:text="#{error.text.title}"></h1>
+
+        <!-- As we are using thymeleaf, you might consider using
+             ${#httpServletRequest.requestURL}. But that returns
+             the path to this error page. Hence we explicitly add
+             the url to the Model in some of the example code.
+         -->
+        <p th:if="${url}">
+            <b><label th:text="#{error.text.url}" /> </b><span th:text="${url}">Page URL</span>
+        </p>
+
+        <p th:if="${timestamp}">
+            <b><label th:text="#{error.text.date}" /> </b><span th:text="${timestamp}">Timestamp</span>
+        </p>
+
+        <p th:text="#{error.message.text}"><a href="#">here</a>.</p>
+
+        <p th:text="#{error.second.message.text}"></p>
+
+        <!--
+          // Hidden Exception Details - this is not a recommendation, but
+          // here is how hide an exception in the page using thymeleaf
+         -->
+        <div th:utext="'&lt;!--'" th:remove="tag"></div>
+        <div th:utext="'Failed URL: ' + ${url}" th:remove="tag">${url}</div>
+        <div th:utext="'Exception: ' + ${exception.message}" th:remove="tag">${exception.message}</div>
+        <ul th:remove="tag">
+            <li th:each="ste: ${exception.stackTrace}" th:remove="tag">
+                <span th:utext="${ste}" th:remove="tag">${ste}</span>
+            </li>
+        </ul>
+        <div th:utext="'--&gt;'" th:remove="tag"></div>
+    </div>
+</div><!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

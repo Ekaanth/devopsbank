@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+<div th:replace="common/navbar :: navbar" />
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-6">           
+			<form id="toSomeoneElseForm" th:action="@{/transfer/toSomeoneElse}" method="post">
+				<div class="form-group">
+					<label for="recipientName" th:text="#{to.someone.else.chose.recipient.text.form}"></label>
+					<select class="custom-select mb-2 mr-sm-2 mb-sm-0" style="width: 555px;" id="recipientName" name="recipientName" th:value="${recipientName}">
+                        <option disabled="disabled" selected="selected" th:text="#{to.someone.else.select.the.recipient.option}"></option>
+                        <option th:each="eachRecipient : ${recipientList}"
+                                th:value="${eachRecipient.name}"
+                                th:text="${eachRecipient.name}"></option>
+                    </select>
+                    <br/>
+				</div>
+				<div class="form-group">
+					<label for="accountType" th:text="#{to.someone.else.transfer.account.from.select}"></label>
+                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" style="width: 555px;" id="accountType" name="accountType" th:value="${accountType}">
+                        <option disabled="disabled" selected="selected" th:text="#{to.someone.else.select.your.account.option}"></option>
+                        <option th:each="account: ${T(com.userfront.enums.SelectAccountsEnum).values()}"
+                                th:value="${account.account}"
+                                th:text="${account.account}"></option>
+                    </select>
+                    <br/>					
+				</div>
+				<div class="form-group">
+					<label th:text="#{to.someone.else.transfer.account.amount.select}"></label>
+					<span class="input-group-addon" th:text="#{to.someone.else.transfer.account.amount.text}"></span>
+					<input th:value="${amount}" type="text" name="amount" id="amount" class="form-control" aria-label="Amount (to the nearest dollar)" />
+				</div>
+				
+				<!-- Spring csrf already is enabled by default -->
+				<!-- Spring automatically generates a token through csrf here -->
+                <input type="hidden"
+                        name="${_csrf.parameterName}"
+                        value="${_csrf.token}"/>
+                        
+				<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{to.someone.else.button.submit.text.transfer.form}"></button>                        
+			</form>
+
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

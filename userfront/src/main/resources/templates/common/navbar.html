@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<!-- Navigation -->
+<div th:fragment="navbar">
+    <img class="img-responsive" src="/images/banner.png" alt="banner"/>
+
+    <nav class="navbar navbar-default " role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" th:href="@{/userFront}"><span th:text="#{navbar.text.home}"></span></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse  navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><span th:text="#{navbar.toggle.accounts}"></span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/account/primaryAccount}" th:text="#{navbar.primary.account}"></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a th:href="@{/account/savingsAccount}" th:text="#{navbar.savings.account}"></a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><span th:text="#{navbar.toggle.transfer}"></span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/transfer/betweenAccounts}" th:text="#{navbar.between.accounts}"></a></li>
+                            <li><a th:href="@{/transfer/toSomeoneElse}" th:text="#{navbar.to.someone.else}"></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a th:href="@{/transfer/recipient}" th:text="#{navbar.add.edit.recipient}"></a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><span th:text="#{navbar.toggle.appointment}"></span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/appointment/create}" th:text="#{navbar.schedule.appointment}"></a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><span th:text="#{navbar.toggle.me}"></span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/user/profile}" th:text="#{navbar.menu.profile}"></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a th:href="@{/logout}" th:text="#{navbar.menu.logout}"></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+</div>
+
+</body>
+</html>

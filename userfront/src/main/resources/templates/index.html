@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<img class="img-responsive" th:src="@{/images/banner.png}" alt="banner"/>
+
+<div class="container">
+    <div class="row ">
+
+        <div class="main-center ">
+
+            <div class="alert alert-danger alert-dismissible" th:if="${param.error}" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <p th:text="#{index.message.invalid}"></p>
+            </div>
+            <div class="alert alert-success alert-dismissible" th:if="${param.logout}" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <p th:text="#{index.message.logged.out}"></p>
+            </div>
+
+            <form class="form-signin" th:action="@{/index}" method="post">
+                <h2 class="form-signin-heading" th:text="#{index.message.signin}"></h2>
+                <div class="form-group">
+                    <label for="username" class="sr-only" th:text="#{index.label.text.username}"></label>
+                    <input type="text" roleId="username" class="form-control" placeholder="Username" name="username"
+                           id="username"
+                           required="required" autofocus="autofocus"/>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="sr-only" th:text="#{index.label.text.password}"></label>
+                    <input type="password" roleId="inputPassword" class="form-control" placeholder="Password"
+                           id="password"
+                           name="password" required="required"/>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="remember-me" id="remember-me"/> &nbsp;<label th:text="#{index.checkbox.remember.me}"></label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{index.button.text.signin}"></button>
+            </form>
+
+            <hr />
+
+            <div class="form-group ">
+                <a type="submit" class="btn btn-info btn-lg btn-block login-button" th:href="@{/signup}" th:text="#{index.a.button.text.signup}"></a>
+            </div>
+        </div>
+
+    </div>
+</div><!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>
